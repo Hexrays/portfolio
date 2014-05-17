@@ -1,10 +1,11 @@
 // bower:scss
 // endbower
 
-@import "compass/reset";
-@import "compass/css3";
-@import "lux/utility";
-@import "constants"
+// @import "compass/reset";
+// @import "compass/css3";
+@import "compass";
+@import "utilities/hex";
+@import "constants";
 
 html, body {
     @include size(100%);
