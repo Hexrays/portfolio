@@ -1,9 +1,8 @@
 // bower:scss
 // endbower
 
-// @import "compass/reset";
-// @import "compass/css3";
-@import "compass";
+@import "compass/reset";
+@import "compass/css3";
 @import "utilities/hex";
 @import "constants";
 
@@ -26,6 +25,29 @@ body {
     padding: 0.2em 0;
 }
 
+.img-holder {
+    height: 200px;
+    width: 200px;
+}
 
+img {
+    @include size(100%);
+}
+
+em {
+    font-weight: bold;
+}
+
+.keyword-list {
+    display: inline;
+}
+
+.keywords {
+    display: inline-block;
+}
+
+.page-content {
+    padding-top: 58px;
+}
 
 @import "nav";

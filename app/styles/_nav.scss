@@ -1,13 +1,13 @@
 // **************************************************
 // **************************************************
-// NAV
+// Header
 // **************************************************
 // **************************************************
 
-nav {
-    @include position-fixed($top:0, $z-index:100);
+header {
+    @include position-fixed($top:0, $left:0, $z-index:100);
+    @include size(100%, auto);
 
-    height     : 100%;
     background : $mainTheme;
 
     a {
@@ -20,102 +20,78 @@ nav {
     }
 
     @include breakpoint(lg) {
-        @include size(100%, auto);
-        @include clearfix;
+        // @include size(100%, auto);
+        // @include clearfix;
 
-        overflow : hidden;
+        // overflow : hidden;
     }
-}
-
-.nav-show {
-    overflow : visible;
 }
 
 .name {
     z-index     : 100;
-    margin      : 30px 0;
-    padding     : 0 1.5em;
+    float       : left;
+    padding     : 1em;
     font-weight : normal;
-    font-size   : 2em;
-
-    @include breakpoint(lg) {
-        float   : left;
-        margin  : 5px 0;
-        padding : 0 1em;
-    }
+    font-size   : 1em;
 }
 
-.menu {
-    display    : none;
-    float      : right;
-    margin     : 0 0 0 .9em;
-    padding    : .75em .8em;
-    color      : #fff;
-    text-align : right;
-    font-size  : 1.4em;
+.menu-link {
+    display : none;
+    float   : right;
+    padding : 1em;
 
-    &:hover {
-        text-decoration : none;
-    }
-
-    @include breakpoint(lg) {
+    @include breakpoint(xs){
         display : block;
     }
 }
 
-.nav-links {
-    padding    : 0 50px;
-    background : $mainTheme;
-    list-style : none;
-    font-size  : 1.4em;
+nav[role=navigation] {
+    overflow   : hidden;
+    max-height : none;
+    transition : all 0.4s ease-out;
 
-    a {
-        display : block;
-        padding : 0 0 .55em;
-        color   : $thisBlue;
+    &.active {
+        max-height : 15em;
+    }
 
-        @include breakpoint(lg) {
-            display : block;
-            margin  : .55em .9em;
+    @include breakpoint(xs){
+        max-height : 0;
+        clear      : both;
+    }
+}
+
+    .nav-list {
+        bottom     : 0;
+        float      : right;
+        margin     : 0 0 0 -0.25em;
+        padding    : 0;
+
+        @include breakpoint(xs){
+            bottom : auto;
+            margin : 0;
+            width  : 100%;
+            border-top : 1px solid #202020;
+        }
+    }
+
+        .nav-item {
+            display : inline-block;
+            margin  : 0 0.25em;
             padding : 0;
+
+            @include breakpoint(xs){
+                width      : 100%;
+                text-align : center;
+            }
         }
 
-        @include breakpoint(sm) {
-            margin : .85em 1.2em;
+        .nav-link {
+            display : block;
+            padding : 1em;
+            border  : 0;
+
+            @include breakpoint(xs){
+                padding       : 0.8em;
+                border-bottom : 1px solid #202020;
+            }
         }
-
-        &:hover {
-            color : $sublLtBrown;
-        }
-    }
-
-    @include breakpoint(lg) {
-        position : absolute;
-        top      : 2.3em;
-        right    : 0;
-        margin   : 0;
-        padding  : 0;
-    }
-}
-
-.social-media {
-    position    : absolute;
-    bottom      : 0;
-    width       : 100%;
-    text-align  : center;
-    font-size   : 1.8em;
-    line-height : 2em;
-
-    a {
-        margin : 0 10px;
-
-        &:hover {
-            color           : $baseTextColor;
-            text-decoration : none;
-        }
-    }
-
-    @include breakpoint(lg) {
-        display : none;
-    }
-}
