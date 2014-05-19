@@ -21,7 +21,8 @@ module.exports = function (grunt) {
     // Configurable paths
     var config = {
         app: 'app',
-        dist: 'dist'
+        dist: 'dist',
+        tmp: '.tmp'
     };
 
     // Define the configuration for all the tasks
@@ -63,8 +64,8 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= config.app %>/{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',
+                    '<%= config.tmp %>/{,*/}*.html',
+                    '<%= config.tmp %>/styles/{,*/}*.css',
                     '<%= config.app %>/images/{,*/}*'
                 ]
             },
@@ -72,6 +73,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= config.app %>/templates/layouts/*.hbs',
                     '<%= config.app %>/templates/pages/*.hbs',
+                    '<%= config.app %>/templates/pages/folio/*.hbs',
                     '<%= config.app %>/templates/partials/*.hbs'
                 ],
                 tasks: ['assemble:serve']
@@ -126,7 +128,7 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
-                        '.tmp',
+                        '<%= config.tmp %>',
                         '<%= config.dist %>/*',
                         '!<%= config.dist %>/.git*'
                     ]
@@ -196,9 +198,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/styles/',
+                    cwd: '<%= config.tmp %>/styles/',
                     src: '{,*/}*.css',
-                    dest: '.tmp/styles/'
+                    dest: '<%= config.tmp %>/styles/'
                 }]
             }
         },
@@ -244,8 +246,8 @@ module.exports = function (grunt) {
             options: {
                 assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
             },
-            html: ['<%= config.dist %>/{,*/}*.html'],
-            css: ['<%= config.dist %>/styles/{,*/}*.css']
+            html: ['<%= config.tmp %>/{,*/}*.html'],
+            css: ['<%= config.tmp %>/styles/{,*/}*.css']
         },
 
         // The following *-min tasks produce minified files in the dist folder
@@ -275,7 +277,7 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     collapseBooleanAttributes: true,
-                    collapseWhitespace: true,
+                    // collapseWhitespace: true,
                     removeAttributeQuotes: true,
                     removeCommentsFromCDATA: true,
                     removeEmptyAttributes: true,
@@ -285,7 +287,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '.tmp',
+                    cwd: '<%= config.tmp %>',
                     src: '{,*/}*.html',
                     dest: '<%= config.dist %>'
                 }]
@@ -296,23 +298,27 @@ module.exports = function (grunt) {
             options: {
                 flatten     : true,
                 layout      : 'page.hbs',
-                layoutdir   : '<%= config.app %>/templates/layouts',
+                layoutdir   : '<%= config.app %>/src/layouts',
+                partials    : ['<%= config.app %>/src/partials/*.hbs'],
                 assets      : 'dist/images',
-                data        : '<%= config.app %>/templates/data/*.json',
-                partials    : ['<%= config.app %>/templates/partials/*.hbs'],
                 collections : [{
                     name      : 'site',
                     sortorder : 'descending'
                 }]
             },
+            site: {
+                files: {
+                    '<%= config.tmp %>/portfolio/': ['<%= config.app %>/src/pages/folio/*.hbs']
+                }
+            },
             dist: {
                 files: {
-                    '<%= config.app %>/': ['<%= config.app %>/templates/pages/*.hbs']
+                    '<%= config.tmp %>/': ['<%= config.app %>/src/pages/*.hbs']
                 }
             },
             serve: {
                 files: {
-                    '.tmp/': ['<%= config.app %>/templates/pages/*.hbs']
+                    '<%= config.tmp %>/': ['<%= config.app %>/src/pages/*.hbs'],
                 }
             }
         },
@@ -364,7 +370,7 @@ module.exports = function (grunt) {
                 expand: true,
                 dot: true,
                 cwd: '<%= config.app %>/styles',
-                dest: '.tmp/styles/',
+                dest: '<%= config.tmp %>/styles/',
                 src: '{,*/}*.css'
             }
         },
@@ -398,9 +404,8 @@ module.exports = function (grunt) {
             dist: [
                 'compass',
                 'copy:styles',
-                'assemble',
-                'imagemin',
-                'svgmin'
+                // 'imagemin',
+                // 'svgmin'
             ]
         }
     });
@@ -445,6 +450,7 @@ module.exports = function (grunt) {
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
+        'assemble',
         'autoprefixer',
         'concat',
         'cssmin',
@@ -453,7 +459,7 @@ module.exports = function (grunt) {
         'modernizr',
         // 'rev',
         'usemin',
-        'htmlmin'
+        // 'htmlmin'
     ]);
 
     grunt.registerTask('default', [
