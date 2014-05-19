@@ -72,8 +72,8 @@ module.exports = function (grunt) {
             assemble: {
                 files: [
                     '<%= config.app %>/templates/layouts/*.hbs',
-                    '<%= config.app %>/templates/pages/*.hbs',
-                    '<%= config.app %>/templates/pages/folio/*.hbs',
+                    '<%= config.app %>/src/pages/*.hbs',
+                    '<%= config.app %>/src/pages/folio/*.hbs',
                     '<%= config.app %>/templates/partials/*.hbs'
                 ],
                 tasks: ['assemble:serve']
@@ -298,15 +298,18 @@ module.exports = function (grunt) {
             options: {
                 flatten     : true,
                 layout      : 'page.hbs',
-                layoutdir   : '<%= config.app %>/src/layouts',
-                partials    : ['<%= config.app %>/src/partials/*.hbs'],
+                layoutdir   : '<%= config.app %>/templates/layouts',
+                partials    : ['<%= config.app %>/templates/partials/*.hbs'],
                 assets      : 'dist/images',
                 collections : [{
-                    name      : 'site',
+                    title     : 'site',
                     sortorder : 'descending'
                 }]
             },
             site: {
+                options: {
+                    layout: 'folio.hbs'
+                },
                 files: {
                     '<%= config.tmp %>/portfolio/': ['<%= config.app %>/src/pages/folio/*.hbs']
                 }

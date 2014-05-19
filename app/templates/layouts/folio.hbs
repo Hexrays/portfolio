@@ -1,0 +1,14 @@
+<ul>
+{{#each site }}
+    <li>
+        <h3>{{this.data.title}}</h3>
+        <div class="img-holder"><img src="{{this.data.image}}" alt="{{this.data.title}}"></div>
+        <p><em>Description: </em>{{this.data.description}}</p>
+        <p><em>Responsibilities: </em>{{this.data.responsibilities}}</p>
+        <p><em>Keywords:</em></p>
+        <ul class="keyword-list">{{#each this.data.keywords}}
+            <li class="keywords">{{this}} </li>{{/each}}
+        </ul>
+    </li>
+{{/each}}
+</ul>
