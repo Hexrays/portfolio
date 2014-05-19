@@ -301,15 +301,14 @@ module.exports = function (grunt) {
                 layoutdir   : '<%= config.app %>/templates/layouts',
                 partials    : ['<%= config.app %>/templates/partials/*.hbs'],
                 assets      : 'dist/images',
-                collections : [{
-                    title     : 'site',
-                    sortorder : 'descending'
-                }]
+                collections : [
+                    {
+                        name      : 'site',
+                        sortorder : 'descending'
+                    }
+                ]
             },
             site: {
-                options: {
-                    layout: 'folio.hbs'
-                },
                 files: {
                     '<%= config.tmp %>/portfolio/': ['<%= config.app %>/src/pages/folio/*.hbs']
                 }

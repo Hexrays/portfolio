@@ -6,8 +6,9 @@
             <a href="#menu" class="menu-link">Menu</a>
             <nav id="menu" role="navigation">
                 <ul class="nav-list">
-                    <li class="nav-item"><a class="nav-link" href="/projects.html">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+                {{#withSort pages "data.number"}}{{#if data.nav}}
+                    <li class="nav-item"><a href="{{basename}}.html" class="nav-link">{{this.data.title}}</a></li>
+                {{/if}}{{/withSort}}
                 </ul>
             </nav>
                {{!--  <div class="social-media">

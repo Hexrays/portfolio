@@ -86,9 +86,10 @@ nav[role=navigation] {
         }
 
         .nav-link {
-            display : block;
-            padding : 1em;
-            border  : 0;
+            display        : block;
+            padding        : 1em;
+            border         : 0;
+            // text-transform : capitalize;
 
             @include breakpoint(xs){
                 padding       : 0.8em;
