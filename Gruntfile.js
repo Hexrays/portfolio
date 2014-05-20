@@ -303,12 +303,12 @@ module.exports = function (grunt) {
                 assets      : 'dist/images',
                 collections : [
                     {
-                        name      : 'site',
+                        name      : 'folio',
                         sortorder : 'descending'
                     }
                 ]
             },
-            site: {
+            folio: {
                 files: {
                     '<%= config.tmp %>/portfolio/': ['<%= config.app %>/src/pages/folio/*.hbs']
                 }
